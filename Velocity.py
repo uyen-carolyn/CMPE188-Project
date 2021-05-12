@@ -26,8 +26,9 @@ labels = torch.tensor([1]).unsqueeze(0)
 #Create the prediction
 prediction = model(**encoded_sentence, labels=labels)
 
-#Convert the prediction logits into its sigmoid representation, then convert to python list
+#Convert the prediction logits into its sigmoid representation, then convert to python list, and print each percentage
 results = (torch.sigmoid(prediction.logits)).tolist()[0]
+print("Probability of each category:\nHate Speech: " + str(int(results[0] * 100)) + "%\nOffensive Language: " + str(int(results[1] * 100)) + "%\nNeither: " + str(int(results[2] * 100)) + "%")
 
 #Create a dictionary that maps labels to high level meanings
 dictionary = dict()
