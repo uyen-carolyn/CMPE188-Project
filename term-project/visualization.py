@@ -6,11 +6,11 @@ datafile = 'clean_v1.csv'
 data = pd.DataFrame(pd.read_csv(datafile), columns=['tweet', 'category', 'class'])
 
 def num_of_cursewords(row):
-'''
-Computes the amount of curse words in a string
-Takes a string as input
-Returns an integer
-'''
+    '''
+    Computes the amount of curse words in a string
+    Takes a string as input
+    Returns an integer
+    '''
     cursewords = { # predefined set of curse words
         "ass",
         "shit",
