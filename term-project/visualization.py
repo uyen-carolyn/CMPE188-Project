@@ -1,15 +1,17 @@
 import sys
 import numpy as np
 import pandas as pd
-#from textualheatmap import TextualHeatmap
-#import seaborn as sns
-import matplotlib.pyplot as plt
 
 datafile = 'clean_v1.csv'
 data = pd.DataFrame(pd.read_csv(datafile), columns=['tweet', 'category', 'class'])
 
 def num_of_cursewords(row):
-    cursewords = {
+'''
+Computes the amount of curse words in a string
+Takes a string as input
+Returns an integer
+'''
+    cursewords = { # predefined set of curse words
         "ass",
         "shit",
         "fuck",
@@ -49,6 +51,7 @@ def num_of_cursewords(row):
             count += 1
     return count
 
+# This section counts the number of hate speech observations, offensive language observations, and neither observations in the dataset
 hate_speech_tot = 0
 offensive_tot = 0
 neither_tot = 0
@@ -61,8 +64,10 @@ for _, row in data.iterrows():
         offensive_tot += 1
 totals = pd.DataFrame([['hate_speech',hate_speech_tot],['offensive_lang', offensive_tot],['neither',neither_tot]], columns=['category', 'count'])
 totals['count'] = totals['count'].astype(float)
+# Create bar plot for showing amount of data in each class
 totals.plot.bar(x="category", y="count", ylabel="Amount of data points", rot=0, title="Data distribution of labels")
 
+# this section find the max number of curse words in any observation, and creates a dataframe for category,class,curse word word count
 cursewords_list = list()
 max_curses = 0
 for i, row in data.iterrows():
@@ -72,6 +77,7 @@ for i, row in data.iterrows():
     cursewords_list.append([row['category'], int(row['class']), count])
 cursewords_df = pd.DataFrame(cursewords_list, columns=['category', 'class', 'cursecount'])
 
+# This section counts the number of hate speech observations, offensive language observations, and neither observations in the dataset for each curse word count from 0 to the max amount of curse words in the observations
 d = dict()
 for i in range(max_curses + 1):
     hate_speech_tot = 0
@@ -87,9 +93,11 @@ for i in range(max_curses + 1):
     d[i] = (hate_speech_tot, offensive_tot, neither_tot)
 
 df = pd.DataFrame(d)
+# plot the amount of curse words by category
 df.plot.bar(stacked=True, rot=0, xlabel="category", ylabel="Amount of curse words", title="Amount of curse words by category")
 df = df.T
 df.columns=["neither", "offensive language", "hate speech"]
+# plot the category by the amount of cursewords
 df.plot.bar(stacked=True, rot=0, xlabel="amount of curse words", ylabel="Amount of data points", title="Category by the amount of cursewords")
 
 plt.show()
