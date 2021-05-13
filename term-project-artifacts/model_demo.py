@@ -5,11 +5,11 @@ import torch
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case = True)
 
 #Load the pretrained model
-model = BertForSequenceClassification.from_pretrained('../BERTV3/')
+model = BertForSequenceClassification.from_pretrained('C:\\Users\\david\\OneDrive\\Documents\\GitHub\\CMPE188-Project\\term-project-artifacts\\BERTV3')
 
 #Set the model to evaluation mode
 model.eval()
-
+ 
 #Initialize labels
 labels = torch.tensor([1]).unsqueeze(0)
 
