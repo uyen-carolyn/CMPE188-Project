@@ -5,7 +5,7 @@ import torch
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case = True)
 
 #Load the pretrained model
-model = BertForSequenceClassification.from_pretrained('BERTV3/')
+model = BertForSequenceClassification.from_pretrained('../BERTV3/')
 
 #Set the model to evaluation mode
 model.eval()
