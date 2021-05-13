@@ -4,7 +4,7 @@ import torch
 #Import tokenizer from transformers
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case = True)
 
-#Load the pretrained model
+#Load the pretrained model. Please include the absolute path to the BERTV3 folder downloaded from this link: https://drive.google.com/file/d/1nJ36Rkd1D2emMS8g5-u_80J8XHTxidbW/view?usp=sharing
 model = BertForSequenceClassification.from_pretrained('C:\\Users\\david\\OneDrive\\Documents\\GitHub\\CMPE188-Project\\term-project-artifacts\\BERTV3')
 
 #Set the model to evaluation mode
